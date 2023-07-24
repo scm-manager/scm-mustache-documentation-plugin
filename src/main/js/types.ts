@@ -22,27 +22,6 @@
  * SOFTWARE.
  */
 
-plugins {
-  id 'org.scm-manager.smp' version '0.15.0'
-}
-
-dependencies {
-  // define dependencies to other plugins here e.g.:
-  // plugin "sonia.scm.plugins:scm-mail-plugin:2.1.0"
-  // optionalPlugin "sonia.scm.plugins:scm-editor-plugin:2.0.0"
-}
-
-scmPlugin {
-  scmVersion = "2.45.1"
-  displayName = "Mustache Documentation"
-  description = "Mustache models and documentations"
-
-   author = "Cloudogu GmbH"
-   category = "Documentation"
-
-  openapi {
-    packages = [
-      "com.cloudogu.mustache"
-    ]
-  }
+export type MustacheModels = {
+  [name: string]: string[];
 }

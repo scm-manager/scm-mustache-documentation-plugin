@@ -24,18 +24,13 @@
 
 package com.cloudogu.mustache;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import sonia.scm.plugin.ExtensionPoint;
 
-@Path("v2/sample")
-class SampleResource {
+import java.util.List;
 
-  @GET
-  @Produces(MediaType.TEXT_PLAIN)
-  public String sample() {
-    return "Sample";
-  }
+@ExtensionPoint
+public interface MustacheModelProvider {
 
+  List<String> getModel();
+  String getName();
 }

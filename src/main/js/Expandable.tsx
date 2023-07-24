@@ -22,27 +22,32 @@
  * SOFTWARE.
  */
 
-plugins {
-  id 'org.scm-manager.smp' version '0.15.0'
-}
+//TODO Copied from Syntax.tsx in the core
+//TODO Should probably become an independent component in the core, to make sure every expandable looks the same
 
-dependencies {
-  // define dependencies to other plugins here e.g.:
-  // plugin "sonia.scm.plugins:scm-mail-plugin:2.1.0"
-  // optionalPlugin "sonia.scm.plugins:scm-editor-plugin:2.0.0"
-}
+import React, { FC, useState } from "react";
+import { Icon } from "@scm-manager/ui-components";
+import classNames from "classnames";
 
-scmPlugin {
-  scmVersion = "2.45.1"
-  displayName = "Mustache Documentation"
-  description = "Mustache models and documentations"
+type ExpandableProps = {
+  header: React.ReactNode;
+  className?: string;
+};
 
-   author = "Cloudogu GmbH"
-   category = "Documentation"
+const Expandable: FC<ExpandableProps> = ({ header, children, className }) => {
+  const [expanded, setExpanded] = useState(false);
 
-  openapi {
-    packages = [
-      "com.cloudogu.mustache"
-    ]
-  }
-}
+  return (
+    <div className={classNames("card search-syntax-accordion", className)}>
+      <header onClick={() => setExpanded(!expanded)} className="card-header is-clickable">
+        <span className="card-header-title">{header}</span>
+        <span className="card-header-icon">
+          {expanded ? <Icon name="chevron-down" alt={"TODO"} /> : <Icon name="chevron-left" alt={"TODO"} />}
+        </span>
+      </header>
+      {expanded ? <div className="card-content">{children}</div> : null}
+    </div>
+  );
+};
+
+export default Expandable;

@@ -1,5 +1,18 @@
 {
   "scm-mustache-documentation-plugin": {
-
+    "mustacheDocPage": {
+      "error": {
+        "title": "Fehler",
+        "subtitle": "Die Mustache Models konnten nicht geladen werden!"
+      },
+      "nameHeader": "Attribut",
+      "descriptionHeader": "Beschreibung",
+      "missingDescription": "Beschreibung für Attribut fehlt",
+      "pageTitle": "Mustache Templates",
+      "pageSubtitle": "Lernen Sie mehr über Mustache und die verfügbaren Models",
+      "modelTitle": "Verfügbare Models",
+      "exampleTitle": "Beispiele",
+      "introduction": "Mustache ist eine Template Sprache, um statischen Text mit dynamischen Inhalten zu erweitern. Die dynamischen Inhalte stammen aus vordefinierten Modellen. Weitere Informationen befinden sich auf der offiziellen Mustache <1>Dokumenation</1>."
+    }
   }
 }

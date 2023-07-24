@@ -24,15 +24,26 @@
 
 package com.cloudogu.mustache;
 
-import org.junit.jupiter.api.Test;
+import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
+class MustacheModelCollector {
 
-class SampleResourceTest {
+  private final Set<MustacheModelProvider> mustacheModelProviderSet;
 
+  @Inject
+  MustacheModelCollector(Set<MustacheModelProvider> mustacheModelProviderSet) {
+    this.mustacheModelProviderSet = mustacheModelProviderSet;
+  }
 
-  @Test
-  void test() {
-    assertThat("").isEqualTo("");
+  Map<String, List<String>> getModels() {
+    Map<String, List<String>> models = new HashMap<>();
+
+    mustacheModelProviderSet.forEach(provider -> models.put(provider.getName(), provider.getModel()));
+
+    return models;
   }
 }

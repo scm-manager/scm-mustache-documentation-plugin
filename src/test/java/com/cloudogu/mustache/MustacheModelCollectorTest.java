@@ -22,27 +22,48 @@
  * SOFTWARE.
  */
 
-plugins {
-  id 'org.scm-manager.smp' version '0.15.0'
-}
+package com.cloudogu.mustache;
 
-dependencies {
-  // define dependencies to other plugins here e.g.:
-  // plugin "sonia.scm.plugins:scm-mail-plugin:2.1.0"
-  // optionalPlugin "sonia.scm.plugins:scm-editor-plugin:2.0.0"
-}
+import com.google.common.collect.ImmutableSet;
+import org.junit.jupiter.api.Test;
 
-scmPlugin {
-  scmVersion = "2.45.1"
-  displayName = "Mustache Documentation"
-  description = "Mustache models and documentations"
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-   author = "Cloudogu GmbH"
-   category = "Documentation"
+import static org.assertj.core.api.Assertions.assertThat;
 
-  openapi {
-    packages = [
-      "com.cloudogu.mustache"
-    ]
+class MustacheModelCollectorTest {
+
+  private MustacheModelCollector collector;
+
+  @Test
+  void shouldReturnEmptyListIfNoProviders() {
+    collector = new MustacheModelCollector(Set.of());
+    Map<String, List<String>> result = collector.getModels();
+
+    assertThat(result).hasSize(0);
+  }
+
+  @Test
+  void shouldGetModelFromProvider() {
+    collector = new MustacheModelCollector(ImmutableSet.of(new TestProvider()));
+    Map<String, List<String>> result = collector.getModels();
+
+    assertThat(result).hasSize(1);
+    assertThat(result.get("TestModel")).containsOnly("TestProp1", "PropTest2");
+  }
+
+  static class TestProvider implements MustacheModelProvider {
+
+    @Override
+    public List<String> getModel() {
+      return List.of("TestProp1", "PropTest2");
+    }
+
+    @Override
+    public String getName() {
+      return "TestModel";
+    }
   }
 }

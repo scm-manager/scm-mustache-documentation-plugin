@@ -23,5 +23,6 @@
  */
 
 import { binder } from "@scm-manager/ui-extensions";
+import MustacheDocRoute from "./MustacheDocRoute";
 
-binder.bind("", "");
+binder.bind("main.route", MustacheDocRoute);

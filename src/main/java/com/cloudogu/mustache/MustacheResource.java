@@ -22,27 +22,32 @@
  * SOFTWARE.
  */
 
-plugins {
-  id 'org.scm-manager.smp' version '0.15.0'
-}
+package com.cloudogu.mustache;
 
-dependencies {
-  // define dependencies to other plugins here e.g.:
-  // plugin "sonia.scm.plugins:scm-mail-plugin:2.1.0"
-  // optionalPlugin "sonia.scm.plugins:scm-editor-plugin:2.0.0"
-}
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Map;
 
-scmPlugin {
-  scmVersion = "2.45.1"
-  displayName = "Mustache Documentation"
-  description = "Mustache models and documentations"
+@Path("v2/mustache")
+public class MustacheResource {
 
-   author = "Cloudogu GmbH"
-   category = "Documentation"
+  private final MustacheModelCollector collector;
 
-  openapi {
-    packages = [
-      "com.cloudogu.mustache"
-    ]
+  @Inject
+  MustacheResource(MustacheModelCollector collector) {
+    this.collector = collector;
+  }
+
+  @GET
+  @Path("")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getModels() {
+    Map<String, List<String>> models = collector.getModels();
+    return Response.ok(models).build();
   }
 }

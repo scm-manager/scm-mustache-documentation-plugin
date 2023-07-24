@@ -1,5 +1,18 @@
 {
   "scm-mustache-documentation-plugin": {
-
+    "mustacheDocPage": {
+      "error": {
+        "title": "Error",
+        "subtitle": "The Mustache models could not get fetched!"
+      },
+      "nameHeader": "Property",
+      "descriptionHeader": "Description",
+      "missingDescription": "Missing description for property",
+      "pageTitle": "Mustache Templates",
+      "pageSubtitle": "Learn more about Mustache Templates and the available models",
+      "modelTitle": "Available models",
+      "exampleTitle": "Examples",
+      "introduction": "Mustache is a template language to enrich static text with dynamic content from a predefined model. To learn more about Mustache itself, take a look at the official <1>documentation</1>."
+    }
   }
 }

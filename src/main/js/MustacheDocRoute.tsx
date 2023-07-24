@@ -22,27 +22,20 @@
  * SOFTWARE.
  */
 
-plugins {
-  id 'org.scm-manager.smp' version '0.15.0'
-}
+import React, { FC } from "react";
+import { ProtectedRoute } from "@scm-manager/ui-components";
+import MustacheDocPage from "./MustacheDocPage";
 
-dependencies {
-  // define dependencies to other plugins here e.g.:
-  // plugin "sonia.scm.plugins:scm-mail-plugin:2.1.0"
-  // optionalPlugin "sonia.scm.plugins:scm-editor-plugin:2.0.0"
-}
+type Props = {
+  authenticated: boolean;
+};
 
-scmPlugin {
-  scmVersion = "2.45.1"
-  displayName = "Mustache Documentation"
-  description = "Mustache models and documentations"
+const MustacheDocRoute: FC<Props> = ({ authenticated }) => {
+  return (
+    <ProtectedRoute authenticated={authenticated} path={"/mustacheDocs"}>
+      <MustacheDocPage />
+    </ProtectedRoute>
+  );
+};
 
-   author = "Cloudogu GmbH"
-   category = "Documentation"
-
-  openapi {
-    packages = [
-      "com.cloudogu.mustache"
-    ]
-  }
-}
+export default MustacheDocRoute;

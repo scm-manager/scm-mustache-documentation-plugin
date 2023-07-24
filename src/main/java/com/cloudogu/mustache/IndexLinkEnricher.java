@@ -22,27 +22,34 @@
  * SOFTWARE.
  */
 
-plugins {
-  id 'org.scm-manager.smp' version '0.15.0'
-}
+package com.cloudogu.mustache;
 
-dependencies {
-  // define dependencies to other plugins here e.g.:
-  // plugin "sonia.scm.plugins:scm-mail-plugin:2.1.0"
-  // optionalPlugin "sonia.scm.plugins:scm-editor-plugin:2.0.0"
-}
+import sonia.scm.api.v2.resources.Enrich;
+import sonia.scm.api.v2.resources.HalAppender;
+import sonia.scm.api.v2.resources.HalEnricher;
+import sonia.scm.api.v2.resources.HalEnricherContext;
+import sonia.scm.api.v2.resources.Index;
+import sonia.scm.api.v2.resources.LinkBuilder;
+import sonia.scm.api.v2.resources.ScmPathInfoStore;
+import sonia.scm.plugin.Extension;
 
-scmPlugin {
-  scmVersion = "2.45.1"
-  displayName = "Mustache Documentation"
-  description = "Mustache models and documentations"
+import javax.inject.Inject;
+import javax.inject.Provider;
 
-   author = "Cloudogu GmbH"
-   category = "Documentation"
+@Extension
+@Enrich(Index.class)
+class IndexLinkEnricher implements HalEnricher {
 
-  openapi {
-    packages = [
-      "com.cloudogu.mustache"
-    ]
+  private final Provider<ScmPathInfoStore> pathInfoProvider;
+
+  @Inject
+  IndexLinkEnricher(Provider<ScmPathInfoStore> pathInfoProvider) {
+    this.pathInfoProvider = pathInfoProvider;
+  }
+
+  @Override
+  public void enrich(HalEnricherContext context, HalAppender appender) {
+    LinkBuilder linkBuilder = new LinkBuilder(pathInfoProvider.get().get(), MustacheResource.class);
+    appender.appendLink("mustacheModels", linkBuilder.method("getModels").parameters().href());
   }
 }
