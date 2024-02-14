@@ -35,7 +35,7 @@ import sonia.scm.api.v2.resources.HalEnricherContext;
 import sonia.scm.api.v2.resources.Index;
 import sonia.scm.api.v2.resources.ScmPathInfoStore;
 
-import javax.inject.Provider;
+import jakarta.inject.Provider;
 import java.net.URI;
 
 import static org.mockito.Mockito.verify;
