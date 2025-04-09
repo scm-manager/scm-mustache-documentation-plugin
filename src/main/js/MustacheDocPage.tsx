@@ -15,13 +15,15 @@
  */
 
 import React, { FC } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { Page, ErrorPage, Loading } from "@scm-manager/ui-components";
+import { useDocumentTitle } from "@scm-manager/ui-core";
 import { useMustacheModels } from "./useMustacheModels";
 import Expandable from "./Expandable";
-import { Trans, useTranslation } from "react-i18next";
 
 const MustacheDocPage: FC = () => {
   const [t] = useTranslation("plugins");
+  useDocumentTitle(t("scm-mustache-documentation-plugin.mustacheDocPage.pageTitle"));
   const { isLoading, error, data } = useMustacheModels();
 
   if (isLoading) {
