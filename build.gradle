@@ -22,7 +22,7 @@ dependencies {
 }
 
 scmPlugin {
-  scmVersion = "3.7.0"
+  scmVersion = "4.0.0-SNAPSHOT"
   displayName = "Mustache Documentation"
   description = "Mustache models and documentations"
 

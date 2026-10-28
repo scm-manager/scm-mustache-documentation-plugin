@@ -14,14 +14,16 @@
  * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 
-import { apiClient, ApiResult, useRequiredIndexLink } from "@scm-manager/ui-api";
-import { useQuery } from "react-query";
-import { MustacheModels } from "./types";
+import {apiClient, ApiResult, useRequiredIndexLink} from "@scm-manager/ui-api";
+import {useQuery} from "@tanstack/react-query";
+import {MustacheModels} from "./types";
 
 export const useMustacheModels = (): ApiResult<MustacheModels> => {
   const modelsLink = useRequiredIndexLink("mustacheModels");
 
-  return useQuery<MustacheModels, Error>(["mustacheModels"], () =>
-    apiClient.get(modelsLink).then(response => response.json())
+  return useQuery<MustacheModels, Error>({
+      queryKey: ["mustacheModels"], queryFn: () =>
+        apiClient.get(modelsLink).then((response) => response.json()),
+    }
   );
 };

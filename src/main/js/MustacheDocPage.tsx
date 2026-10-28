@@ -16,8 +16,8 @@
 
 import React, { FC } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Page, ErrorPage, Loading } from "@scm-manager/ui-components";
-import { useDocumentTitle } from "@scm-manager/ui-core";
+import { Page, ErrorPage } from "@scm-manager/ui-components";
+import { Loading, useDocumentTitle } from "@scm-manager/ui-core";
 import { useMustacheModels } from "./useMustacheModels";
 import Expandable from "./Expandable";
 
@@ -27,8 +27,6 @@ const MustacheDocPage: FC = () => {
   const { isLoading, error, data } = useMustacheModels();
 
   if (isLoading) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     return <Loading />;
   }
 
@@ -102,14 +100,14 @@ const PropertyTable: FC<RenderModelProps> = ({ name, propertyNames }) => {
         </tr>
       </thead>
       <tbody>
-        {propertyNames.map(propertyName => {
+        {propertyNames.map((propertyName) => {
           return (
             <tr>
               <td>{propertyName}</td>
               <td>
                 {t(
                   `mustacheDoc.${name}.properties.${propertyName}`,
-                  t("scm-mustache-documentation-plugin.mustacheDocPage.missingDescription")
+                  t("scm-mustache-documentation-plugin.mustacheDocPage.missingDescription"),
                 )}
               </td>
             </tr>

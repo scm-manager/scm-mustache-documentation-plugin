@@ -16,4 +16,4 @@
 
 export type MustacheModels = {
   [name: string]: string[];
-}
+};

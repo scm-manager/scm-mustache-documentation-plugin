@@ -14,20 +14,12 @@
  * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 
-import React, { FC } from "react";
-import { ProtectedRoute } from "@scm-manager/ui-components";
+import React from "react";
 import MustacheDocPage from "./MustacheDocPage";
 
-type Props = {
-  authenticated: boolean;
-};
+const mustacheRoute = () => ({
+  path: "/mustacheDocs",
+  element: <MustacheDocPage />
+});
 
-const MustacheDocRoute: FC<Props> = ({ authenticated }) => {
-  return (
-    <ProtectedRoute authenticated={authenticated} path={"/mustacheDocs"}>
-      <MustacheDocPage />
-    </ProtectedRoute>
-  );
-};
-
-export default MustacheDocRoute;
+export default mustacheRoute;

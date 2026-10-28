@@ -24,6 +24,7 @@ import classNames from "classnames";
 type ExpandableProps = {
   header: React.ReactNode;
   className?: string;
+  children: React.ReactNode;
 };
 
 const Expandable: FC<ExpandableProps> = ({ header, children, className }) => {
